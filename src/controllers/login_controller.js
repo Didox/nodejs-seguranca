@@ -2,15 +2,15 @@ const Usuario = require("../models/usuario")
 const Cookie = require("../helpers/cookie")
 
 const LoginController = {
-  index: async (req, res, next) => {
+  index: async (req, res) => {
     const erros = await req.consumeFlash('erro');
     res.render('login/index', { erros: erros });
   },
-  deslogar: async (req, res, next) => {
+  deslogar: async (req, res) => {
     Cookie.remove(res, "usuario")
-    return res.redirect("/")
+    res.redirect("/")
   },
-  logar: async (req, res, next) => {
+  logar: async (req, res) => {
     let usuario = await Usuario.login(req.query.email, req.query.senha);
     if(usuario){
       Cookie.set(res, "usuario", usuario)
@@ -19,7 +19,7 @@ const LoginController = {
       await req.flash('erro', 'Usuário ou senha inválidos');
     }
 
-    return res.redirect("/")
+    res.redirect("/")
   }
 }
 
