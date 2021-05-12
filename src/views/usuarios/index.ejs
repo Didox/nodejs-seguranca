@@ -39,6 +39,7 @@
         <tr>
           <td>Nome</td>
           <td>Email</td>
+          <td>Descrição</td>
           <td></td>
           <td></td>
         </tr>
@@ -51,6 +52,10 @@
             </td>
             <td>
               <%= usuarios[i].email %>
+            </td>
+            <td>
+              <!-- %- usuarios[i].descricao % -->
+              <%= usuarios[i].descricao %>
             </td>
             <td style="width: 100px;">
               <a href="/usuarios/<%= usuarios[i].id %>/editar" class="btn btn-primary">Editar</a>
