@@ -47,6 +47,7 @@ const UsuariosController = {
     
     let usuario = new Usuario(req.body);
     usuario.id = req.params.id;
+    usuario.senha = Cripto.make(usuario.senha)
     await usuario.salvar();
     await req.flash('sucesso', 'Usuário atualizado com sucesso');
     res.redirect("/")

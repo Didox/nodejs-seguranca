@@ -1,5 +1,4 @@
 const db = require('../config/db')
-const Cripto = require('../helpers/cripto')
 
 module.exports = class Cliente{
   constructor(obj){
@@ -29,10 +28,7 @@ module.exports = class Cliente{
   async salvar(){
     let sql = "";
     let values = [];
-
-    this.senha = Cripto.make(this.senha)
-    console.log(this.senha)
-
+    
     if(this.id && this.id > 0){
       sql = "update usuarios set nome=?, email=?, descricao=?, senha=? where id=?";
       values = [this.nome, this.email, this.descricao, this.senha, this.id];
