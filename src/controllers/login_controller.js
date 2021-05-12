@@ -10,12 +10,12 @@ const LoginController = {
   deslogar: async (req, res) => {
     Cookie.remove(res, "usuario")
     Cookie.remove(res, "usuario_validador")
-    res.redirect("/")
+    res.redirect("/login")
   },
   logar: async (req, res) => {
     if (req.recaptcha.error) {
       await req.flash('erro', 'Captcha inválido');
-      res.redirect("/login")
+      return res.redirect("/login")
     }
     else{
       let usuario = await Usuario.buscaPorEmail(req.body.email);
@@ -27,11 +27,12 @@ const LoginController = {
           let validador = Cripto.make(string_usuario);
           Cookie.set(res, "usuario_validador", validador)
           res.redirect("/usuarios")
+          return;
         }
       }
       
       await req.flash('erro', 'Usuário ou senha inválidos');
-      res.redirect("/login")
+      return res.redirect("/login")
     }
   }
 }
