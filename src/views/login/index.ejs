@@ -20,13 +20,18 @@
   </head>
 
   <body class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" action="/logar" method="GET">
       <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Login</h1>
       <label for="email" class="sr-only">Email</label>
-      <input type="email" id="email" class="form-control" placeholder="Email" required autofocus>
+      <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
       <label for="senha" class="sr-only">Senha</label>
-      <input type="password" id="senha" class="form-control" placeholder="Senha" required>
+      <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
+      <% if(erros != ""){ %>
+        <div class="alert alert-danger" role="alert">
+          <%= erros %>
+        </div>
+      <% } %>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
     </form>
   </body>

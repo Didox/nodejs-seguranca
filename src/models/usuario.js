@@ -7,17 +7,11 @@ module.exports = class Cliente{
     this.senha = atributos.senha
   }
 
-  static login(email, senha, callback){
-    let query = "SELECT * FROM usuarios where email = '" + email + "' senha = '" + senha + "' ";
-    db.exec(query, function(dados, erro) {
-      if(erro){
-        console.log("Erro ao executar a query (" + query + ")");
-        callback.call(null, []);
-      }
-      else{
-        callback.call(null, dados);
-      }
-    });
+  static async login(email, senha){
+    let query = "SELECT * FROM usuarios where email = '" + email + "' and senha = '" + senha + "' ";
+    let usuarios = await db.exec(query);
+    if(usuarios.length == 0) return undefined
+    return usuarios[0];
   }
 
   static async todos(){

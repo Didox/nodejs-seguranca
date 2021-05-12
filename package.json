@@ -11,9 +11,11 @@
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-flash-message": "^2.1.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "mysql": "*"
+    "mysql": "*",
+    "express-session": "*"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

@@ -1,16 +1,25 @@
 const Usuario = require("../models/usuario")
+const Cookie = require("../helpers/cookie")
 
 const LoginController = {
-  index: (req, res, next) => {
-    res.render('login/index');
+  index: async (req, res, next) => {
+    const erros = await req.consumeFlash('erro');
+    res.render('login/index', { erros: erros });
   },
-  logar: (req, res, next) => {
-    if(Usuario.login(res.body.usuario, res.body.senha)){
-      return res.redirect("/")
+  deslogar: async (req, res, next) => {
+    Cookie.remove(res, "usuario")
+    return res.redirect("/")
+  },
+  logar: async (req, res, next) => {
+    let usuario = await Usuario.login(req.query.email, req.query.senha);
+    if(usuario){
+      Cookie.set(res, "usuario", usuario)
     }
     else{
-      return res.redirect("/")
+      await req.flash('erro', 'Usuário ou senha inválidos');
     }
+
+    return res.redirect("/")
   }
 }
 
