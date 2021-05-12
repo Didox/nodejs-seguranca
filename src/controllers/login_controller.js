@@ -1,5 +1,6 @@
 const Usuario = require("../models/usuario")
 const Cookie = require("../helpers/cookie")
+const Cripto = require('../helpers/cripto')
 
 const LoginController = {
   index: async (req, res) => {
@@ -8,6 +9,7 @@ const LoginController = {
   },
   deslogar: async (req, res) => {
     Cookie.remove(res, "usuario")
+    Cookie.remove(res, "usuario_validador")
     res.redirect("/")
   },
   logar: async (req, res) => {
@@ -18,7 +20,10 @@ const LoginController = {
     else{
       let usuario = await Usuario.login(req.body.email, req.body.senha);
       if(usuario){
-        Cookie.set(res, "usuario", usuario)
+        let string_usuario = JSON.stringify(usuario);
+        Cookie.set(res, "usuario", string_usuario)
+        let validador = Cripto.make(string_usuario);
+        Cookie.set(res, "usuario_validador", validador)
         res.redirect("/usuarios")
       }
       else{

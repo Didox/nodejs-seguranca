@@ -11,7 +11,7 @@ module.exports = {
     return cookieParse[key];
   },
   set: (response, key, value) => {
-    response.cookie(key, JSON.stringify(value), { maxAge: (2 * 60 * 60 * 1000), httpOnly: true }); // 2 horas
+    response.cookie(key, value, { maxAge: (2 * 60 * 60 * 1000), httpOnly: true }); // 2 horas
   },
   remove: (response, key) => {
     response.cookie(key, "", { maxAge: -1, httpOnly: true });
