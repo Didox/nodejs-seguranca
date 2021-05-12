@@ -14,12 +14,12 @@ const LoginController = {
     let usuario = await Usuario.login(req.query.email, req.query.senha);
     if(usuario){
       Cookie.set(res, "usuario", usuario)
+      res.redirect("/usuarios")
     }
     else{
       await req.flash('erro', 'Usuário ou senha inválidos');
+      res.redirect("/login")
     }
-
-    res.redirect("/")
   }
 }
 
