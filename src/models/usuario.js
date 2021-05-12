@@ -33,7 +33,7 @@ module.exports = class Cliente{
     else{
       sql = `insert into usuarios(nome, email, descricao, senha) values('${this.nome}', '${this.email}', '${this.descricao}', '${this.senha}')`;
     }
-    await db.exec(sql, values);
+    await db.exec(sql);
   }
 
   static async find(id){
