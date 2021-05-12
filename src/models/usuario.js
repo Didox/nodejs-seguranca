@@ -1,4 +1,5 @@
 const db = require('../config/db')
+const Cripto = require('../helpers/cripto')
 
 module.exports = class Cliente{
   constructor(obj){
@@ -10,10 +11,13 @@ module.exports = class Cliente{
   }
 
   static async login(email, senha){
-    let query = "SELECT * FROM usuarios where email = ? and senha = ?";
+    let query = "SELECT * FROM usuarios where email = ?";
     let usuarios = await db.exec(query, [email, senha]);
     if(usuarios.length == 0) return undefined
-    return usuarios[0];
+    let usuario = usuarios[0];
+    let valido = Cripto.compare(senha, usuario.senha);
+    if(!valido) return undefined
+    return usuario;
   }
 
   static async todos(){
@@ -28,6 +32,10 @@ module.exports = class Cliente{
   async salvar(){
     let sql = "";
     let values = [];
+
+    this.senha = Cripto.make(this.senha)
+    console.log(this.senha)
+
     if(this.id && this.id > 0){
       sql = "update usuarios set nome=?, email=?, descricao=?, senha=? where id=?";
       values = [this.nome, this.email, this.descricao, this.senha, this.id];
