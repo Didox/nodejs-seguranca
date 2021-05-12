@@ -18,18 +18,20 @@ const LoginController = {
       res.redirect("/login")
     }
     else{
-      let usuario = await Usuario.login(req.body.email, req.body.senha);
+      let usuario = await Usuario.buscaPorEmail(req.body.email);
       if(usuario){
-        let string_usuario = JSON.stringify(usuario);
-        Cookie.set(res, "usuario", string_usuario)
-        let validador = Cripto.make(string_usuario);
-        Cookie.set(res, "usuario_validador", validador)
-        res.redirect("/usuarios")
+        let valido = Cripto.compare(req.body.senha, usuario.senha);
+        if(valido){
+          let string_usuario = JSON.stringify(usuario);
+          Cookie.set(res, "usuario", string_usuario)
+          let validador = Cripto.make(string_usuario);
+          Cookie.set(res, "usuario_validador", validador)
+          res.redirect("/usuarios")
+        }
       }
-      else{
-        await req.flash('erro', 'Usuário ou senha inválidos');
-        res.redirect("/login")
-      }
+      
+      await req.flash('erro', 'Usuário ou senha inválidos');
+      res.redirect("/login")
     }
   }
 }

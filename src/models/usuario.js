@@ -10,14 +10,11 @@ module.exports = class Cliente{
     this.senha = obj.senha
   }
 
-  static async login(email, senha){
+  static async buscaPorEmail(email){
     let query = "SELECT * FROM usuarios where email = ?";
-    let usuarios = await db.exec(query, [email, senha]);
+    let usuarios = await db.exec(query, [email]);
     if(usuarios.length == 0) return undefined
-    let usuario = usuarios[0];
-    let valido = Cripto.compare(senha, usuario.senha);
-    if(!valido) return undefined
-    return usuario;
+    return usuarios[0];
   }
 
   static async todos(){
