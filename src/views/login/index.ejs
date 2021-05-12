@@ -27,11 +27,18 @@
       <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
       <label for="senha" class="sr-only">Senha</label>
       <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
+      <input type="hidden" id="recaptcha" name="g-recaptcha-response">
       <% if(erros != ""){ %>
         <div class="alert alert-danger" role="alert">
           <%= erros %>
         </div>
       <% } %>
+      <script>
+        function cb(data){
+          document.getElementById("recaptcha").value = data
+        }
+      </script>
+      <%- captcha %>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
     </form>
   </body>

@@ -6,6 +6,7 @@ const logger = require('morgan');
 const session = require('express-session');
 const { flash } = require('express-flash-message');
 const routes = require('./src/config/routes');
+
 const app = express();
 
 // view engine setup
