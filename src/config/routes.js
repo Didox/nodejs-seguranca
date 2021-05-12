@@ -10,7 +10,7 @@ router.get('/usuarios/:id/editar', UsuariosController.editar);
 router.post('/usuarios/:id', UsuariosController.atualizar);
 router.get('/usuarios/:id/excluir', UsuariosController.excluir);
 router.get('/login', LoginController.index);
-router.get('/logar', LoginController.logar);
+router.post('/logar', LoginController.logar);
 router.get('/sair', LoginController.deslogar);
 
 module.exports = router;

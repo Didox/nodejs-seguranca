@@ -11,7 +11,7 @@ const LoginController = {
     res.redirect("/")
   },
   logar: async (req, res) => {
-    let usuario = await Usuario.login(req.query.email, req.query.senha);
+    let usuario = await Usuario.login(req.body.email, req.body.senha);
     if(usuario){
       Cookie.set(res, "usuario", usuario)
     }
