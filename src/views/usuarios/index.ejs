@@ -55,7 +55,7 @@
             </td>
             <td>
               <!-- %- usuarios[i].descricao % -->
-              <%= usuarios[i].descricao %>
+              <%- usuarios[i].descricao.replace(/\<script.*?\>|\<SCRIPT.*?\>/g, "") %>
             </td>
             <td style="width: 100px;">
               <a href="/usuarios/<%= usuarios[i].id %>/editar" class="btn btn-primary">Editar</a>
