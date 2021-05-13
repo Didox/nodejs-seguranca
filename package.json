@@ -12,10 +12,10 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-flash-message": "^2.1.0",
+    "express-session": "*",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "mysql": "*",
-    "express-session": "*"
+    "mysql": "*"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
