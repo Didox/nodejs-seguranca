@@ -4,7 +4,7 @@ const Cripto = require('../helpers/cripto')
 const UsuariosController = {
   index: async (req, res) => {
     const sucesso = await req.consumeFlash('sucesso');
-    res.render('usuarios/index', { sucesso: sucesso, usuarios: (await Usuario.todos()) });
+    res.render('usuarios/index', { usuario: req.usuarioLogado, sucesso: sucesso, usuarios: (await Usuario.todos()) });
   },
   excluir: async (req, res) => {
     await Usuario.excluir(req.params.id);

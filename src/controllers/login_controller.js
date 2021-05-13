@@ -22,6 +22,8 @@ const LoginController = {
       if(usuario){
         let valido = Cripto.compare(req.body.senha, usuario.senha);
         if(valido){
+          usuario.senha = undefined;
+          usuario.descricao = undefined;
           let string_usuario = JSON.stringify(usuario);
           Cookie.set(res, "usuario", string_usuario)
           let validador = Cripto.make(string_usuario);
