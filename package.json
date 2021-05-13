@@ -7,6 +7,7 @@
     "dev": "nodemon src/server.js"
   },
   "dependencies": {
+    "bcrypt": "*",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
@@ -16,11 +17,10 @@
     "express-session": "*",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "mysql": "*",
-    "bcrypt": "*"
+    "mysql": "*"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3",
-    "axios": "*"
+    "axios": "*",
+    "nodemon": "^2.0.3"
   }
 }

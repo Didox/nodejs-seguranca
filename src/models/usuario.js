@@ -12,7 +12,7 @@ module.exports = class Cliente{
 
   static async login(email, senha){
     let query = "SELECT * FROM usuarios where email = ?";
-    let usuarios = await db.exec(query, [email, senha]);
+    let usuarios = await db.exec(query, [email]);
     if(usuarios.length == 0) return undefined
     let usuario = usuarios[0];
     let valido = Cripto.compare(senha, usuario.senha);
@@ -34,7 +34,6 @@ module.exports = class Cliente{
     let values = [];
 
     this.senha = Cripto.make(this.senha)
-    console.log(this.senha)
 
     if(this.id && this.id > 0){
       sql = "update usuarios set nome=?, email=?, descricao=?, senha=? where id=?";
